@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPT Markets Retail EDM Onboarding Journey — Full Overview</title>
+<style>
+  :root {
+    --d1: #3b82f6; --d1-bg: #eff6ff; --d1-dark: #1d4ed8;
+    --d2: #8b5cf6; --d2-bg: #f5f3ff; --d2-dark: #6d28d9;
+    --d3: #f59e0b; --d3-bg: #fffbeb; --d3-dark: #b45309;
+    --d4: #10b981; --d4-bg: #ecfdf5; --d4-dark: #047857;
+    --bg: #0f172a; --bg2: #1e293b; --bg3: #334155;
+    --text: #f1f5f9; --text2: #94a3b8; --text3: #64748b;
+    --border: #334155; --border2: #475569;
+    --card: #1e293b;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
+
+  /* HEADER */
+  .site-header { background: linear-gradient(135deg, #0f172a 0%, #1a2744 100%); border-bottom: 1px solid var(--border); padding: 2.5rem 2rem 2rem; }
+  .site-header h1 { font-size: 1.75rem; font-weight: 700; color: #f1f5f9; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .site-header .meta { font-size: 12px; color: var(--text3); margin-bottom: 1.25rem; }
+  .journey-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0; }
+  .pill { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1.5px solid; }
+  .pill-1 { background: rgba(59,130,246,0.15); border-color: var(--d1); color: var(--d1); }
+  .pill-2 { background: rgba(139,92,246,0.15); border-color: var(--d2); color: var(--d2); }
+  .pill-3 { background: rgba(245,158,11,0.15); border-color: var(--d3); color: var(--d3); }
+  .pill-4 { background: rgba(16,185,129,0.15); border-color: var(--d4); color: var(--d4); }
+
+  /* MAIN LAYOUT */
+  .main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+  /* DRIP JOURNEY SECTIONS */
+  .drip-intro { font-size: 13px; color: var(--text2); margin: 0.5rem 0 1.5rem; }
+  .drip-section { margin-bottom: 2.5rem; }
+  .drip-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .drip-num { font-size: 1.25rem; font-weight: 800; color: var(--text3); }
+  .drip-title { font-size: 1.1rem; font-weight: 700; }
+  .drip-badges { display: flex; gap: 8px; align-items: center; margin-left: auto; flex-wrap: wrap; }
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .drip-desc { font-size: 13px; color: var(--text2); margin-bottom: 1.25rem; padding: 12px 14px; border-left: 3px solid; border-radius: 0 var(--radius) var(--radius) 0; background: rgba(255,255,255,0.03); }
+  .drip-goal { font-size: 12px; margin-top: 8px; font-weight: 600; }
+
+  /* EMAIL CARDS GRID */
+  .emails-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .email-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; position: relative; transition: border-color 0.2s; }
+  .email-card:hover { border-color: var(--border2); }
+  .email-num { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; display: inline-block; margin-bottom: 8px; letter-spacing: 0.05em; }
+  .email-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .email-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+  .email-timing { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+  .email-body { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 8px; }
+  .email-trigger { font-size: 10px; color: var(--text3); font-style: italic; margin-bottom: 6px; }
+  .email-cta { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+  .transition-note { text-align: center; padding: 14px; color: var(--text3); font-size: 12px; letter-spacing: 0.03em; margin: 1rem 0; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .transition-note::before, .transition-note::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* STATS BAR */
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 2rem 0; }
+  .stat-item { background: var(--card); padding: 1rem 1.25rem; text-align: center; }
+  .stat-num { font-size: 1.75rem; font-weight: 800; color: var(--text); line-height: 1; }
+  .stat-label { font-size: 11px; color: var(--text3); margin-top: 4px; line-height: 1.3; }
+
+  /* ACCORDION */
+  .accordion { margin-bottom: 1rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .accordion-header { display: flex; align-items: center; gap: 12px; padding: 1rem 1.25rem; cursor: pointer; background: var(--card); user-select: none; }
+  .accordion-header:hover { background: var(--bg3); }
+  .accordion-num { font-size: 11px; font-weight: 700; color: var(--text3); background: var(--bg3); padding: 2px 8px; border-radius: 4px; }
+  .accordion-title { font-size: 14px; font-weight: 600; flex: 1; }
+  .accordion-sub { font-size: 12px; color: var(--text3); }
+  .accordion-hint { font-size: 11px; color: var(--text3); font-style: italic; margin-left: auto; margin-right: 8px; }
+  .accordion-arrow { color: var(--text3); transition: transform 0.25s; font-size: 16px; }
+  .accordion-arrow.open { transform: rotate(180deg); }
+  .accordion-body { padding: 1.5rem; background: var(--bg); border-top: 1px solid var(--border); display: none; }
+  .accordion-body.open { display: block; }
+
+  /* EXEC SUMMARY CONTENT */
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 1.5rem; }
+  .summary-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .summary-card-num { font-size: 1.5rem; font-weight: 800; margin-bottom: 4px; }
+  .summary-card-label { font-size: 11px; color: var(--text3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .summary-card-subtitle { font-size: 12px; color: var(--text2); margin-bottom: 10px; }
+  .summary-breakdown { font-size: 12px; }
+  .summary-row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-row-label { color: var(--text2); }
+  .summary-row-val { font-weight: 600; }
+
+  /* OBSERVATIONS */
+  .obs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .obs-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .obs-num { font-size: 11px; font-weight: 700; color: var(--text3); margin-bottom: 6px; }
+  .obs-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .obs-body { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .obs-body strong { color: var(--text); }
+
+  /* SCOPE TABLE */
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.5rem; }
+  .scope-block { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .scope-block h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .scope-item { font-size: 12px; color: var(--text2); padding: 3px 0; display: flex; gap: 6px; }
+  .scope-item::before { content: '✅'; font-size: 10px; }
+  .scope-out::before { content: '⚪'; }
+
+  /* DATA SOURCE */
+  .datasource { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 12px; }
+  .datasource-icon { font-size: 1.5rem; }
+  .datasource-label { font-size: 12px; color: var(--text2); }
+  .datasource-label strong { color: var(--text); }
+  .datasource-label a { color: var(--d1); text-decoration: none; }
+
+  /* PIPELINE FLOW */
+  .pipeline-container { display: flex; flex-direction: column; gap: 0; }
+  .pipeline-entry { text-align: center; padding: 8px; font-size: 12px; color: var(--text3); }
+  .pipeline-node { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 0 2rem; }
+  .pipeline-node-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .pipeline-node-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .pipeline-node-title { font-size: 14px; font-weight: 700; }
+  .pipeline-node-sub { font-size: 12px; color: var(--text3); }
+  .pipeline-node-desc { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .pipeline-node-status { font-size: 11px; color: var(--text3); font-style: italic; }
+  .pipeline-drip { margin: 0 0; padding: 10px 2.5rem; position: relative; }
+  .pipeline-drip-inner { background: rgba(255,255,255,0.03); border: 1px dashed var(--border2); border-radius: var(--radius); padding: 10px 14px; }
+  .pipeline-drip-title { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .pipeline-drip-goal { font-size: 11px; color: var(--text3); }
+  .pipeline-arrow { text-align: center; font-size: 18px; color: var(--text3); padding: 4px 0; }
+  .pipeline-exit { text-align: center; padding: 8px; font-size: 12px; color: var(--text3); }
+  .pipeline-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 1.5rem; }
+  .pipeline-detail-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .pipeline-detail-card .drip-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; color: var(--text3); }
+  .pipeline-detail-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .detail-row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label { color: var(--text3); font-weight: 600; }
+  .detail-val { color: var(--text2); text-align: right; max-width: 60%; }
+
+  /* DRIP DETAIL CARDS */
+  .drip-detail-section { margin-bottom: 1.5rem; }
+  .drip-detail-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .drip-detail-num { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+  .drip-detail-title { font-size: 14px; font-weight: 700; }
+  .drip-detail-meta { font-size: 12px; color: var(--text3); margin-left: auto; }
+  .email-detail-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+  .email-detail-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .email-detail-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .email-detail-num-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
+  .email-detail-title { font-size: 13px; font-weight: 700; }
+  .email-detail-timing { font-size: 11px; color: var(--text3); }
+  .email-meta-row { display: flex; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+  .email-meta-tag { font-size: 10px; padding: 2px 7px; border-radius: 3px; background: rgba(255,255,255,0.05); color: var(--text2); border: 1px solid var(--border); }
+  .email-logic { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+  /* FULL CONTENT SECTIONS */
+  .email-full-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+  .email-full-header { padding: 12px 16px; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border); }
+  .email-full-num { font-size: 12px; font-weight: 800; padding: 3px 9px; border-radius: 4px; }
+  .email-full-title { font-size: 14px; font-weight: 700; flex: 1; }
+  .email-full-timing { font-size: 12px; color: var(--text3); }
+  .email-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); }
+  .email-tab { padding: 7px 16px; font-size: 12px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; color: var(--text3); transition: all 0.2s; }
+  .email-tab.active { color: var(--text); border-bottom-color: var(--d1); }
+  .email-tab-content { padding: 14px 16px; display: none; }
+  .email-tab-content.active { display: block; }
+  .email-field { margin-bottom: 10px; }
+  .email-field-label { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+  .email-field-val { font-size: 13px; color: var(--text); font-weight: 600; }
+  .email-field-body { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .email-field-body strong { color: var(--text); }
+  .email-cta-line { margin-top: 10px; }
+  .email-cta-btn { display: inline-block; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 4px; letter-spacing: 0.04em; }
+
+  /* COLORS HELPERS */
+  .c1 { color: var(--d1); } .bg1 { background: rgba(59,130,246,0.18); }
+  .c2 { color: var(--d2); } .bg2c { background: rgba(139,92,246,0.18); }
+  .c3 { color: var(--d3); } .bg3c { background: rgba(245,158,11,0.18); }
+  .c4 { color: var(--d4); } .bg4 { background: rgba(16,185,129,0.18); }
+  .border1 { border-left-color: var(--d1); }
+  .border2 { border-left-color: var(--d2); }
+  .border3 { border-left-color: var(--d3); }
+  .border4 { border-left-color: var(--d4); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); margin-bottom: 1rem; }
+
+  a { color: var(--d1); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .summary-grid { grid-template-columns: 1fr; }
+    .obs-grid { grid-template-columns: 1fr; }
+    .scope-grid { grid-template-columns: 1fr; }
+    .pipeline-details { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <h1>CPT Markets Retail EDM Onboarding Journey — Full Overview</h1>
+  <div class="meta">1 unified funnel · 11 Emails · Live account (auto-created) → KYC → FTD → Day 14 handoff · EN/CN bilingual · Source: CRM Trigger Map + Marketing</div>
+  <div class="journey-pills">
+    <span class="pill pill-2">● Stage 2 · Live → KYC</span>
+    <span class="pill pill-3">● Stage 3 · KYC → FTD</span>
+    <span class="pill pill-4">● Stage 4 · FTD → Lifecycle</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- DRIP FLOW OVERVIEW LABEL -->
+  <div style="margin-bottom: 1rem; margin-top: 0.5rem;">
+    <div class="section-label">Drip Journey Flow</div>
+    <div style="font-size: 13px; color: var(--text2);">Unlike a demo-first funnel, every CPT signup automatically receives a live MT4 (Classic account, default leverage) — so this is <strong style="color:var(--text);">one continuous activation funnel</strong>, not separate demo/live tracks. Demo is an optional, client-initiated branch via the Portal that runs alongside this core journey (see Scope Notes below).</div>
+  </div>
+
+  <!-- STAGE 2: Live -> KYC -->
+  <div class="drip-section">
+    <div class="drip-header">
+      <span class="drip-num c2">02</span>
+      <span class="drip-title c2">Live → KYC</span>
+      <div class="drip-badges">
+        <span class="badge bg2c c2">6 emails</span>
+        <span class="badge" style="background:rgba(255,255,255,0.06);color:var(--text2);">Variable, CS-dependent</span>
+        <span class="badge" style="background:rgba(255,255,255,0.06);color:var(--text2);">Entry: Account registered</span>
+      </div>
+    </div>
+    <div class="drip-desc border2" style="border-left: 3px solid var(--d2);">
+      <strong>Registered → Verified</strong><br>
+      Every signup auto-creates a live MT4 account (Classic, default leverage). The very first send delivers registration confirmation, MT4 login credentials, and the initial KYC push together. From there, three reminder emails fire only if KYC hasn't been started — once submitted, they stop and a holding email takes over during compliance review. KYC rejection is handled entirely by the CS team, outside this automated flow.
+      <div class="drip-goal c2">🎯 Goal: Get the client to submit and pass identity verification</div>
+    </div>
+    <div class="emails-grid">
+      <div class="email-card">
+        <span class="email-num bg2c c2">E1</span>
+        <div class="email-label c2">Confirmation + KYC Push</div>
+        <div class="email-title">Registration Successful</div>
+        <div class="email-timing">T0 · sent with E2</div>
+        <div class="email-body">Confirms the account was registered successfully and pushes the client toward KYC — funding, full platform access, and account management are gated behind it.</div>
+        <div class="email-trigger">Trigger: Registration event · Owner: Marketing</div>
+        <span class="email-cta bg2c c2">Complete KYC</span>
+      </div>
+      <div class="email-card">
+        <span class="email-num bg2c c2">E2</span>
+        <div class="email-label c2">Credentials</div>
+        <div class="email-title">Account Opened — MT4 Login Details</div>
+        <div class="email-timing">T0 · sent with E1</div>
+        <div class="email-body">Delivers MT4 login, password, investor password, server and base currency. Transactional in nature — sent together with E1, not sequenced independently.</div>
+        <div class="email-trigger">Trigger: Registration event · Owner: Marketing</div>
+        <span class="email-cta bg2c c2">Login to Portal</span>
+      </div>
+      <div class="email-card">
+        <span class="email-num bg2c c2">E3</span>
+        <div class="email-label c2">KYC Reminder</div>
+        <div class="email-title">Complete Your Verification</div>
+        <div class="email-timing">T0 + 2–4h</div>
+        <div class="email-body">First follow-up nudge (not the first ask — that's E1). Reinforces the 2-minute completion framing and what KYC unlocks.</div>
+        <div class="email-trigger">Trigger: KYC not started</div>
+        <span class="email-cta bg2c c2">Complete Verification</span>
+      </div>
+      <div class="email-card">
+        <span class="email-num bg2c c2">E4</span>
+        <div class="email-label c2">KYC Reminder</div>
+        <div class="email-title">Your Data Is Safe With CPT</div>
+        <div class="email-timing">+24h from E3</div>
+        <div class="email-body">Different angle — addresses data security/privacy hesitation rather than repeating the same ask.</div>
+        <div class="email-trigger">Trigger: KYC still not started</div>
+        <span class="email-cta bg2c c2">Complete Verification</span>
+      </div>
+      <div class="email-card">
+        <span class="email-num bg2c c2">E5</span>
+        <div class="email-label c2">KYC Reminder</div>
+        <div class="email-title">Final Notice — Account Waiting</div>
+        <div class="email-timing">+48h from E3</div>
+        <div class="email-body">Final touch before this branch goes quiet. Urgency framing — no funding or trading until KYC is done.</div>
+        <div class="email-trigger">Trigger: KYC still not started</div>
+        <span class="email-cta bg2c c2">Complete Verification Now</span>
+      </div>
+      <div class="email-card">
+        <span class="email-num bg2c c2">E6</span>
+        <div class="email-label c2">Holding</div>
+        <div class="email-title">Verification Pending Review</div>
+        <div class="email-timing">On KYC submission</div>
+        <div class="email-body">Fires once documents are submitted — cancels the E3–E5 nudge branch. Reassures the client the application is in progress.</div>
+        <div class="email-trigger">Trigger: KYC submitted · Owner: Product</div>
+        <span class="email-cta bg2c c2">—</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-note">↓ KYC approved · client transitions directly into Stage 3's funding push</div>
+
+  <!-- STAGE 3: KYC -> FTD -->
+  <div class="drip-section">
+    <div class="drip-header">
+      <span class="drip-num c3">03</span>
+      <span class="drip-title c3">KYC → FTD</span>
+      <div class="drip-badges">
+        <span class="badge bg3c c3">3 emails</span>
+        <span class="badge" style="background:rgba(255,255,255,0.06);color:var(--text2);">~5 days</span>
+        <span class="badge" style="background:rgba(255,255,255,0.06);color:var(--text2);">Entry: KYC verified · Goal: First Time Deposit</span>
+      </div>
+    </div>
+    <div class="drip-desc border3" style="border-left: 3px solid var(--d3);">
+      <strong>Verified → First deposit (revenue moment)</strong><br>
+      The client can now fund and trade — but many never do. E1 fires the moment KYC is approved and does double duty: it's both the verification confirmation <em>and</em> the funding push, using the 30% deposit bonus (up to $500) as the hook rather than sending a separate "congratulations" email first. The bonus is <strong style="color:var(--text);">self-serve, not automatic</strong> — the client must apply for it in Portal &gt; Campaign, and it credits based on their first deposit amount. Copy must always spell out the claim steps.
+      <div class="drip-goal c3">🎯 Goal: First deposit = customer activation &amp; revenue</div>
+    </div>
+    <div class="emails-grid">
+      <div class="email-card">
+        <span class="email-num bg3c c3">E1</span>
+        <div class="email-label c3">Approval + Bonus Hook</div>
+        <div class="email-title">Fund Your Account & Claim Your 30% Bonus</div>
+        <div class="email-timing">Immediate on KYC approval</div>
+        <div class="email-body">Combines the KYC-approved confirmation with the deposit bonus (30%, up to $500) and the exact 4-step claim path via Portal &gt; Campaign — one email, not two back-to-back sends.</div>
+        <div class="email-trigger">Trigger: KYC approved · Owner: Marketing</div>
+        <span class="email-cta bg3c c3">Fund My Account</span>
+      </div>
+      <div class="email-card">
+        <span class="email-num bg3c c3">E2</span>
+        <div class="email-label c3">Guidance</div>
+        <div class="email-title">How to Fund in 3 Steps</div>
+        <div class="email-timing">+48h</div>
+        <div class="email-body">Removes "not sure how to start" friction with a simple funding walkthrough; reminds them the bonus is still unclaimed.</div>
+        <div class="email-trigger">Trigger: KYC approved, no deposit</div>
+        <span class="email-cta bg3c c3">Fund My Account</span>
+      </div>
+      <div class="email-card">
+        <span class="email-num bg3c c3">E3</span>
+        <div class="email-label c3">Last Touch</div>
+        <div class="email-title">Don't Miss Your $500 Bonus</div>
+        <div class="email-timing">+5 days</div>
+        <div class="email-body">Urgency + trust content (spreads, execution, support) framed around the still-unclaimed bonus.</div>
+        <div class="email-trigger">Trigger: KYC approved, no deposit</div>
+        <span class="email-cta bg3c c3">Claim Your Bonus</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-note">↓ First deposit made · client transitions</div>
+
+  <!-- STAGE 4: FTD -> LIFECYCLE -->
+  <div class="drip-section">
+    <div class="drip-header">
+      <span class="drip-num c4">04</span>
+      <span class="drip-title c4">FTD → Lifecycle</span>
+      <div class="drip-badges">
+        <span class="badge bg4 c4">2 emails</span>
+        <span class="badge" style="background:rgba(255,255,255,0.06);color:var(--text2);">Up to Day 14</span>
+        <span class="badge" style="background:rgba(255,255,255,0.06);color:var(--text2);">Entry: Funded · Exit: Lifecycle handoff</span>
+      </div>
+    </div>
+    <div class="drip-desc border4" style="border-left: 3px solid var(--d4);">
+      <strong>Funded → Lifecycle</strong><br>
+      Most clients who fund an account start trading on their own — there's no meaningful drop-off to nudge here, so this stage doesn't carry a trade-activation branch. E1 simply confirms the deposit (and bonus credit if claimed) and points to the platform's tools. The journey then closes with a fixed Day 14 handoff into lifecycle/retention, regardless of how quickly the client moved through earlier stages.
+      <div class="drip-goal c4">🎯 Goal: Confirm funding, then a clean handoff to lifecycle</div>
+    </div>
+    <div class="emails-grid">
+      <div class="email-card">
+        <span class="email-num bg4 c4">E1</span>
+        <div class="email-label c4">Confirmation</div>
+        <div class="email-title">Deposit Received — Welcome to Trading</div>
+        <div class="email-timing">Immediate on FTD</div>
+        <div class="email-body">Confirms funding (and bonus credit if applied) and points to core platform tools. No activation push — trading is expected to follow naturally.</div>
+        <div class="email-trigger">Trigger: FTD made</div>
+        <span class="email-cta bg4 c4">Go to MT4</span>
+      </div>
+      <div class="email-card">
+        <span class="email-num bg4 c4">E2</span>
+        <div class="email-label c4">Handoff</div>
+        <div class="email-title">Welcome to CPT — What's Next</div>
+        <div class="email-timing">Day 14</div>
+        <div class="email-body">Fixed calendar trigger for every client regardless of path length. Introduces the app, RAF/loyalty program, and moves the client into lifecycle/retention comms.</div>
+        <div class="email-trigger">Trigger: Day 14 mark</div>
+        <span class="email-cta bg4 c4">Explore the App</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-note">✓ Day 14 · onboarding complete → lifecycle/retention</div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num c2">3</div><div class="stat-label">Stages<br>Live→KYC · KYC→FTD · FTD→Lifecycle</div></div>
+    <div class="stat-item"><div class="stat-num c3">11</div><div class="stat-label">Emails<br>across the full funnel</div></div>
+    <div class="stat-item"><div class="stat-num c4">14</div><div class="stat-label">Days<br>to lifecycle handoff (typical path)</div></div>
+    <div class="stat-item"><div class="stat-num c1">30%</div><div class="stat-label">Deposit bonus<br>up to $500, self-serve via Portal</div></div>
+  </div>
+
+  <!-- ── ACCORDION 01: Executive Summary ── -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="accordion-num">01</span>
+      <span class="accordion-title">Executive Summary</span>
+      <span class="accordion-sub">At-a-glance overview of the retail onboarding email program</span>
+      <span class="accordion-hint">Click to expand</span>
+      <span class="accordion-arrow">▾</span>
+    </div>
+    <div class="accordion-body">
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-card-num c2">1 Funnel</div>
+          <div class="summary-card-label">Live → KYC → FTD → Lifecycle</div>
+          <div class="summary-card-subtitle">Not parallel demo/live tracks — every signup auto-creates a live MT4 account, so this is one continuous funnel with demo as an optional side branch.</div>
+          <div class="summary-breakdown">
+            <div class="summary-row"><span class="summary-row-label c2">② Live → KYC</span><span class="summary-row-val">registered → verified</span></div>
+            <div class="summary-row"><span class="summary-row-label c3">③ KYC → FTD</span><span class="summary-row-val">verified → first deposit</span></div>
+            <div class="summary-row"><span class="summary-row-label c4">④ FTD → Lifecycle</span><span class="summary-row-val">funded → Day 14 exit</span></div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-num c3">11 Emails</div>
+          <div class="summary-card-label">Full funnel scope</div>
+          <div class="summary-card-subtitle">11 unique emails across the 3 stages, EN/CN bilingual throughout.</div>
+          <div class="summary-breakdown">
+            <div class="summary-row"><span class="summary-row-label">Live → KYC</span><span class="summary-row-val c2">6 emails</span></div>
+            <div class="summary-row"><span class="summary-row-label">KYC → FTD</span><span class="summary-row-val c3">3 emails</span></div>
+            <div class="summary-row"><span class="summary-row-label">FTD → Lifecycle</span><span class="summary-row-val c4">2 emails</span></div>
+            <div class="summary-row"><span class="summary-row-label" style="font-weight:700;">Total</span><span class="summary-row-val" style="font-weight:700;">11 emails</span></div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-num c4">~14 Days</div>
+          <div class="summary-card-label">Typical-path duration</div>
+          <div class="summary-card-subtitle">Assumes a client who starts KYC promptly. KYC review time itself sits outside this range and is compliance-controlled.</div>
+          <div class="summary-breakdown">
+            <div class="summary-row"><span class="summary-row-label">Live → KYC</span><span class="summary-row-val">~T0–72h + review wait</span></div>
+            <div class="summary-row"><span class="summary-row-label">KYC → FTD</span><span class="summary-row-val">~5 days</span></div>
+            <div class="summary-row"><span class="summary-row-label">FTD → Lifecycle → exit</span><span class="summary-row-val">up to Day 14</span></div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      <div class="section-label">Key Observations — Strategic patterns across the funnel</div>
+      <div class="obs-grid">
+        <div class="obs-card">
+          <div class="obs-num">01</div>
+          <div class="obs-title">One funnel, not two parallel tracks</div>
+          <div class="obs-body">Because every signup auto-creates a live MT4 account (Classic, default leverage), "live vs. demo" isn't a fork at signup. Demo is an <strong>optional, client-initiated branch</strong> from the Portal that runs alongside the core funnel, not a separate acquisition path.</div>
+        </div>
+        <div class="obs-card">
+          <div class="obs-num">02</div>
+          <div class="obs-title">KYC nudges branch on status, not just time</div>
+          <div class="obs-body">E3–E5 fire only while KYC is <strong>not started</strong>. The moment it's submitted, that branch stops and E6 (pending review) takes over — avoiding the "nudge lands mid-review" problem flagged earlier. Rejection handling sits entirely with CS.</div>
+        </div>
+        <div class="obs-card">
+          <div class="obs-num">03</div>
+          <div class="obs-title">Approval and the bonus hook are one moment, not two</div>
+          <div class="obs-body">KYC approval no longer gets its own standalone "congratulations" email. It's merged directly into Stage 3's first send, so the client isn't messaged twice in immediate succession — and the bonus becomes the concrete "why fund now" reason the moment full access unlocks.</div>
+        </div>
+        <div class="obs-card">
+          <div class="obs-num">04</div>
+          <div class="obs-title">No FTT re-activation — it isn't needed</div>
+          <div class="obs-body">Most clients who fund an account go on to trade without any nudge. Rather than build a re-activation branch for an edge case, Stage 4 stays lean: confirm the deposit, then let the client trade on their own timeline. Keeps the funnel shorter and avoids messaging people who don't need it.</div>
+        </div>
+        <div class="obs-card">
+          <div class="obs-num">05</div>
+          <div class="obs-title">The deposit bonus is a claim, not a credit</div>
+          <div class="obs-body">30% up to $500 is <strong>not automatic</strong> — the client applies in Portal &gt; Campaign, and it credits against their first deposit. All three Stage 3 emails spell out the 4-step claim path so it's never assumed.</div>
+        </div>
+        <div class="obs-card">
+          <div class="obs-num">06</div>
+          <div class="obs-title">Exit copy has to hold regardless of path length</div>
+          <div class="obs-body">Day 14 is a <strong>fixed calendar trigger</strong> for every client, fast or slow movers alike. The handoff email can't narrate "the past two weeks" as a step-by-step recap — a client who finished KYC and funding on Day 1 would find that framing inaccurate.</div>
+        </div>
+      </div>
+
+      <hr>
+      <div class="scope-grid">
+        <div class="scope-block">
+          <h4 style="color: var(--d4);">✅ In Scope</h4>
+          <div class="scope-item">Live → KYC (registration, credentials, KYC nudges, pending review) · 6 emails</div>
+          <div class="scope-item">KYC → FTD (approval + deposit bonus hook, funding nudges) · 3 emails</div>
+          <div class="scope-item">FTD → Lifecycle (deposit confirmation, Day 14 handoff) · 2 emails</div>
+          <div class="scope-item" style="font-weight:700; color:var(--text);">Total: 11 emails, EN/CN bilingual</div>
+        </div>
+        <div class="scope-block">
+          <h4 style="color: var(--text3);">⚪ Out of Scope</h4>
+          <div class="scope-item scope-out">Pre-registration OTP / email verification code — spam prevention, not part of this journey</div>
+          <div class="scope-item scope-out">KYC rejection handling — owned entirely by Customer Support, not automated</div>
+          <div class="scope-item scope-out">Demo account branch — optional, client-initiated in Portal, tracked separately</div>
+          <div class="scope-item scope-out">Account type / leverage / MT4↔MT5 changes — self-service unavailable, routed to CS</div>
+          <div class="scope-item scope-out">First-trade re-activation nudges — not needed; funded clients trade without prompting</div>
+          <div class="scope-item scope-out">Post-Day-14 lifecycle/retention content — separate workstream</div>
+          <div class="scope-item scope-out">CPT A (China) localization pass — needs a distinct compliance review, not just translation</div>
+        </div>
+      </div>
+
+      <hr>
+      <div class="datasource">
+        <div class="datasource-icon">📊</div>
+        <div class="datasource-label">
+          <strong>Source:</strong> CRM Trigger Map (Stage 2 rows live) + locked journey structure from Marketing planning sessions<br>
+          Stage 2 content reflects current production copy; Stage 3–4 are net-new, built to match Stage 2's tone and disclosure pattern.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ACCORDION 02: Full Onboarding Pipeline ── -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="accordion-num">02</span>
+      <span class="accordion-title">Full Onboarding Pipeline</span>
+      <span class="accordion-sub">4 client states · 3 drip campaigns · the complete funnel</span>
+      <span class="accordion-hint">Click to expand</span>
+      <span class="accordion-arrow">▾</span>
+    </div>
+    <div class="accordion-body">
+      <div style="font-size: 13px; color: var(--text2); margin-bottom: 1.5rem;">CPT's onboarding funnel has <strong style="color:var(--text);">4 distinct client states</strong>. Between each state sits a dedicated <strong style="color:var(--text);">drip email campaign</strong> nudging the client forward.</div>
+
+      <div style="text-align:center; font-size: 12px; color: var(--text3); margin-bottom: 6px;">↓ Entry: Client signs up (live MT4 auto-created)</div>
+
+      <!-- Node 1 -->
+      <div style="background: var(--card); border: 1px solid var(--d2); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 0 3rem;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(139,92,246,0.2);border:1.5px solid var(--d2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--d2);">1</div>
+          <div><div style="font-size:14px;font-weight:700;">Registered · Live MT4 auto-created</div><div style="font-size:11px;color:var(--text3);">Account exists · KYC not yet submitted</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);">Client has signed up; a live MT4 account (Classic, default leverage) is created automatically. Cannot fund or trade meaningfully without KYC.</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;">Status: Account exists, not yet verified</div>
+      </div>
+
+      <!-- Drip 2 connector -->
+      <div style="padding: 8px 2.5rem;">
+        <div style="background:rgba(139,92,246,0.06); border: 1px dashed var(--d2); border-radius: var(--radius); padding: 10px 14px;">
+          <div style="font-size:12px;font-weight:700;color:var(--d2);">Stage 2 · Live → KYC</div>
+          <div style="font-size:11px;color:var(--text2); margin-top:2px;">6 emails. Registration confirmation + MT4 credentials, three status-gated KYC nudges, and a pending-review holding email. Approval triggers directly into Stage 3's funding push — no separate celebration email.</div>
+          <div style="font-size:11px;color:var(--d2);margin-top:4px;font-weight:600;">🎯 Submit and pass identity verification</div>
+        </div>
+      </div>
+
+      <!-- Node 2 -->
+      <div style="background: var(--card); border: 1px solid var(--d3); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 0 3rem;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(245,158,11,0.2);border:1.5px solid var(--d3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--d3);">2</div>
+          <div><div style="font-size:14px;font-weight:700;">KYC Verified · Ready to fund</div><div style="font-size:11px;color:var(--text3);">Identity verified · No deposit yet</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);">Compliance has approved the client's documents. Full platform access is unlocked — the only thing missing is funding.</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;">Status: Approved, ready to deposit</div>
+      </div>
+
+      <!-- Drip 3 connector -->
+      <div style="padding: 8px 2.5rem;">
+        <div style="background:rgba(245,158,11,0.06); border: 1px dashed var(--d3); border-radius: var(--radius); padding: 10px 14px;">
+          <div style="font-size:12px;font-weight:700;color:var(--d3);">Stage 3 · KYC → FTD</div>
+          <div style="font-size:11px;color:var(--text2); margin-top:2px;">3 emails over ~5 days. The first combines the KYC-approved confirmation with the 30% deposit bonus hook (up to $500, self-serve via Portal &gt; Campaign); the next two build urgency toward claiming it.</div>
+          <div style="font-size:11px;color:var(--d3);margin-top:4px;font-weight:600;">🎯 First Time Deposit = revenue moment</div>
+        </div>
+      </div>
+
+      <!-- Node 3 -->
+      <div style="background: var(--card); border: 1px solid var(--d4); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 0 3rem;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(16,185,129,0.2);border:1.5px solid var(--d4);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--d4);">3</div>
+          <div><div style="font-size:14px;font-weight:700;">Funded</div><div style="font-size:11px;color:var(--text3);">First deposit made · Active customer</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);">Client has deposited funds (bonus credited if claimed). Most clients begin trading on their own from here — no activation push needed.</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;">Status: Funded</div>
+      </div>
+
+      <!-- Drip 4 connector -->
+      <div style="padding: 8px 2.5rem;">
+        <div style="background:rgba(16,185,129,0.06); border: 1px dashed var(--d4); border-radius: var(--radius); padding: 10px 14px;">
+          <div style="font-size:12px;font-weight:700;color:var(--d4);">Stage 4 · FTD → Lifecycle</div>
+          <div style="font-size:11px;color:var(--text2); margin-top:2px;">2 emails up to Day 14. Deposit confirmation, then a fixed Day 14 lifecycle handoff — no trade-activation branch, since funded clients trade without prompting.</div>
+          <div style="font-size:11px;color:var(--d4);margin-top:4px;font-weight:600;">🎯 Confirm funding, then a clean exit to lifecycle</div>
+        </div>
+      </div>
+
+      <!-- Node 4 -->
+      <div style="background: var(--card); border: 2px solid var(--d4); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 0 3rem;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--d4);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;">4</div>
+          <div><div style="font-size:14px;font-weight:700;color:var(--d4);">Day 14 · Onboarding complete</div><div style="font-size:11px;color:var(--text3);">Active customer · Exits to lifecycle</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--text2);">Client exits the onboarding program and enters lifecycle/retention comms — app download, RAF/loyalty introduction, ongoing market content.</div>
+        <div style="font-size:11px;color:var(--d4);margin-top:4px;">Status: Onboarding complete · Funnel exit</div>
+      </div>
+
+      <div style="text-align:center; font-size: 12px; color: var(--d4); margin-top: 10px; font-weight:600;">✓ Exit: Day 14 · Hands off to lifecycle/retention</div>
+
+      <hr>
+      <div class="section-label">Stage Details</div>
+      <div class="pipeline-details">
+        <div class="pipeline-detail-card">
+          <div class="drip-label c2">Stage 2 · Live → KYC</div>
+          <h4>Get the client verified.</h4>
+          <div class="detail-row"><span class="detail-label">Timing</span><span class="detail-val">6 emails · variable</span></div>
+          <div class="detail-row"><span class="detail-label">Entry</span><span class="detail-val">Account registered</span></div>
+          <div class="detail-row"><span class="detail-label">Exit</span><span class="detail-val">KYC approved</span></div>
+          <div class="detail-row"><span class="detail-label">Owner</span><span class="detail-val">Marketing + Product</span></div>
+        </div>
+        <div class="pipeline-detail-card">
+          <div class="drip-label c3">Stage 3 · KYC → FTD</div>
+          <h4>Get the first deposit.</h4>
+          <div class="detail-row"><span class="detail-label">Timing</span><span class="detail-val">3 emails · ~5 days</span></div>
+          <div class="detail-row"><span class="detail-label">Entry</span><span class="detail-val">KYC verified</span></div>
+          <div class="detail-row"><span class="detail-label">Exit</span><span class="detail-val">First deposit made</span></div>
+          <div class="detail-row"><span class="detail-label">Owner</span><span class="detail-val">Marketing</span></div>
+        </div>
+        <div class="pipeline-detail-card">
+          <div class="drip-label c4">Stage 4 · FTD → Lifecycle</div>
+          <h4>Confirm funding, then hand off.</h4>
+          <div class="detail-row"><span class="detail-label">Timing</span><span class="detail-val">2 emails · up to Day 14</span></div>
+          <div class="detail-row"><span class="detail-label">Entry</span><span class="detail-val">First deposit made</span></div>
+          <div class="detail-row"><span class="detail-label">Exit</span><span class="detail-val">Day 14 → Lifecycle</span></div>
+          <div class="detail-row"><span class="detail-label">Owner</span><span class="detail-val">Marketing</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ACCORDION 03: Journey Details Summary ── -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="accordion-num">03</span>
+      <span class="accordion-title">Journey Details Summary</span>
+      <span class="accordion-sub">Condensed logic for all 11 emails — see Section 5 below for full bilingual copy</span>
+      <span class="accordion-hint">Click to expand</span>
+      <span class="accordion-arrow">▾</span>
+    </div>
+    <div class="accordion-body">
+      <!-- Stage 2 -->
+      <div class="drip-detail-section">
+        <div class="drip-detail-header">
+          <span class="drip-detail-num bg2c c2">02</span>
+          <span class="drip-detail-title">Stage 2 · Live → KYC</span>
+          <span class="drip-detail-meta">6 emails · EN/CN · Goal: identity verification complete</span>
+        </div>
+        <div class="email-detail-cards">
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg2c c2">E1</span><span class="email-detail-title">Registration Successful</span><span class="email-detail-timing" style="margin-left:auto;">T0</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: Registration event</span><span class="email-meta-tag">CTA: Complete KYC</span></div>
+            <div class="email-logic">Confirms the account exists and pushes KYC as the very next step, framed around what it unlocks.</div>
+          </div>
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg2c c2">E2</span><span class="email-detail-title">Account Opened — MT4 Details</span><span class="email-detail-timing" style="margin-left:auto;">T0</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: Registration event</span><span class="email-meta-tag">CTA: Login to Portal</span></div>
+            <div class="email-logic">Transactional credentials delivery — sent together with E1, not sequenced separately.</div>
+          </div>
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg2c c2">E3</span><span class="email-detail-title">Complete Your Verification</span><span class="email-detail-timing" style="margin-left:auto;">T0+2-4h</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: KYC not started</span><span class="email-meta-tag">CTA: Complete Verification</span></div>
+            <div class="email-logic">First real follow-up nudge (E1 was the initial ask). 2-minute completion framing.</div>
+          </div>
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg2c c2">E4</span><span class="email-detail-title">Your Data Is Safe With CPT</span><span class="email-detail-timing" style="margin-left:auto;">+24h</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: KYC still not started</span><span class="email-meta-tag">CTA: Complete Verification</span></div>
+            <div class="email-logic">Reassurance angle — addresses data privacy hesitation rather than repeating the ask.</div>
+          </div>
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg2c c2">E5</span><span class="email-detail-title">Final Notice — Account Waiting</span><span class="email-detail-timing" style="margin-left:auto;">+48h</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: KYC still not started</span><span class="email-meta-tag">CTA: Complete Verification Now</span></div>
+            <div class="email-logic">Final touch in this branch. Urgency — no funding or trading without KYC.</div>
+          </div>
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg2c c2">E6</span><span class="email-detail-title">Verification Pending Review</span><span class="email-detail-timing" style="margin-left:auto;">On submission</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: KYC submitted</span><span class="email-meta-tag">CTA: none</span></div>
+            <div class="email-logic">Cancels the E3–E5 branch. Holding message during compliance review.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="drip-detail-section">
+        <div class="drip-detail-header">
+          <span class="drip-detail-num bg3c c3">03</span>
+          <span class="drip-detail-title">Stage 3 · KYC → FTD</span>
+          <span class="drip-detail-meta">3 emails · ~5 days · Goal: First Time Deposit</span>
+        </div>
+        <div class="email-detail-cards">
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg3c c3">E1</span><span class="email-detail-title">Fund Your Account & Claim Your 30% Bonus</span><span class="email-detail-timing" style="margin-left:auto;">Immediate</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: KYC approved</span><span class="email-meta-tag">CTA: Fund My Account</span></div>
+            <div class="email-logic">Merges the KYC-approved confirmation with the bonus hook and the exact self-serve claim steps (Portal &gt; Campaign &gt; Apply) — replaces what would otherwise be two back-to-back emails.</div>
+          </div>
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg3c c3">E2</span><span class="email-detail-title">How to Fund in 3 Steps</span><span class="email-detail-timing" style="margin-left:auto;">+48h</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: KYC approved, no deposit</span><span class="email-meta-tag">CTA: Fund My Account</span></div>
+            <div class="email-logic">Removes "how do I start" friction with a simple walkthrough; reminds of the unclaimed bonus.</div>
+          </div>
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg3c c3">E3</span><span class="email-detail-title">Don't Miss Your $500 Bonus</span><span class="email-detail-timing" style="margin-left:auto;">+5 days</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: KYC approved, no deposit</span><span class="email-meta-tag">CTA: Claim Your Bonus</span></div>
+            <div class="email-logic">Last-touch urgency + trust content (spreads, execution, support).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="drip-detail-section">
+        <div class="drip-detail-header">
+          <span class="drip-detail-num bg4 c4">04</span>
+          <span class="drip-detail-title">Stage 4 · FTD → Lifecycle</span>
+          <span class="drip-detail-meta">2 emails · up to Day 14 · Goal: confirm funding, then handoff</span>
+        </div>
+        <div class="email-detail-cards">
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg4 c4">E1</span><span class="email-detail-title">Deposit Received — Welcome to Trading</span><span class="email-detail-timing" style="margin-left:auto;">Immediate</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: FTD made</span><span class="email-meta-tag">CTA: Go to MT4</span></div>
+            <div class="email-logic">Confirms funding and bonus credit (if claimed), points to platform tools. No activation push — most funded clients trade without prompting.</div>
+          </div>
+          <div class="email-detail-card">
+            <div class="email-detail-header"><span class="email-detail-num-badge bg4 c4">E2</span><span class="email-detail-title">Welcome to CPT — What's Next</span><span class="email-detail-timing" style="margin-left:auto;">Day 14</span></div>
+            <div class="email-meta-row"><span class="email-meta-tag">Trigger: Day 14 mark (fixed)</span><span class="email-meta-tag">CTA: Explore the App</span></div>
+            <div class="email-logic">Closes onboarding and hands off to lifecycle. Deliberately generic — no "past two weeks" recap, since fast and slow movers both hit this trigger.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ACCORDION 04: Scope Notes ── -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="accordion-num">04</span>
+      <span class="accordion-title">Scope Notes &amp; Exclusions</span>
+      <span class="accordion-sub">What this journey deliberately does not cover, and why</span>
+      <span class="accordion-hint">Click to expand</span>
+      <span class="accordion-arrow">▾</span>
+    </div>
+    <div class="accordion-body">
+      <div class="obs-grid">
+        <div class="obs-card">
+          <div class="obs-num c1">01</div>
+          <div class="obs-title">Pre-registration OTP</div>
+          <div class="obs-body">The email verification code sent before registration completes is a <strong>spam-prevention check</strong>, not a journey step — it's skipped entirely for social sign-ins (e.g. Google) and doesn't count toward this flow.</div>
+        </div>
+        <div class="obs-card">
+          <div class="obs-num c1">02</div>
+          <div class="obs-title">KYC rejection handling</div>
+          <div class="obs-body">Rejected KYC submissions are handled directly by the <strong>Customer Support team</strong>, outside of this automated flow. No rejection-specific email exists in this journey.</div>
+        </div>
+        <div class="obs-card">
+          <div class="obs-num c1">03</div>
+          <div class="obs-title">Demo account branch</div>
+          <div class="obs-body">Demo is <strong>optional and client-initiated</strong> from the Portal — since a live account already exists by default, demo is practice, not a prerequisite. Tracked as a separate branch, out of scope for this document.</div>
+        </div>
+        <div class="obs-card">
+          <div class="obs-num c1">04</div>
+          <div class="obs-title">Account type / leverage / platform changes</div>
+          <div class="obs-body">Clients cannot self-serve a change from the default MT4 Classic account. Any request (MT5, different leverage, different account type) is routed to <strong>Customer Support</strong> directly — not surfaced as a CTA anywhere in this journey.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- FULL EMAIL CONTENT -->
+  <div style="margin: 2rem 0 1.5rem;">
+    <div class="section-label">Full Email Content</div>
+    <div style="font-size: 13px; color: var(--text2);">Complete bilingual (EN / 简体中文) subject lines, bodies, and CTAs for all 11 emails, grouped by stage. Stage 2 content reflects current production copy; Stage 3–4 are net-new drafts for review.</div>
+  </div>
+
+  <!-- STAGE 2 FULL CONTENT -->
+  <div style="font-size:14px; font-weight:700; color:var(--d2); margin-bottom:0.75rem;">Stage 2 · Live → KYC</div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg2c c2">E1</span><span class="email-full-title">Registration Successful</span><span style="font-size:11px;color:var(--text3);">T0 · sent with E2 · CTA: Complete KYC</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s2e1','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s2e1','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s2e1-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Welcome to CPT: Complete Your Account Verification</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear Sir/Madam #name#,<br><br>Congratulations on successfully registering with CPT! Now that your registration is complete, you can take the next step toward securing your account by providing your verification details.<br><br><strong>Why Verify Your Account:</strong> Ensures the security of your funds and personal information · Allows for seamless deposits and withdrawals · Complies with regulatory requirements.<br><br>Contact us if you encounter any issues or have questions during the verification process — our support team is ready to assist you.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg2c c2">Complete KYC</span></div>
+    </div>
+    <div class="email-tab-content" id="s2e1-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">欢迎使用CPT - 完成账户注册</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>感谢您选择 CPT Markets，您的账户已成功注册完成。为保障您的账户安全并启用完整平台功能，请按照指引完成身份验证（KYC）流程。<br><br>完成身份验证后，您将可使用以下功能：账户资金相关操作（存入/提取）· 平台完整功能与服务权限 · 个人账户管理功能。<br><br>本邮件为系统自动发送，请勿直接回复。感谢您对CPT Markets的关注与支持，如有任何疑问，请登录CPT Markets官网线上客服咨询，祝您交易顺利！<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg2c c2">E2</span><span class="email-full-title">Account Opened — MT4 Login Details</span><span style="font-size:11px;color:var(--text3);">T0 · sent with E1 · CTA: Login to Portal</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s2e2','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s2e2','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s2e2-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Trading Account Opened - Login Credentials Included</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>Your trading account #userType# at CPT has been opened, please find below your login credentials.<br><br><strong>Account Information:</strong><br>Trading Platform: #TradingPlatform#<br>Trading Account Number: #login#<br>Account Type: #accountType#<br>Trading Password: #Password#<br>Investor Password: #InvestorPassword#<br>Server Name: #Server#<br>Base Currency: #AccountCurrency#<br><br>Please ensure to keep your login details secure. In the event these are lost or used by an unauthorised third party, please contact us immediately.<br><br>How to start trading? To add funds and begin trading, please log in to your Trader Portal.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg2c c2">Login to Portal</span></div>
+    </div>
+    <div class="email-tab-content" id="s2e2-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">交易账户开通及账户详细信息</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>我们为您提供了#userType#账户的详细信息，请妥善保管以下账户细节。<br><br>账户信息：交易平台：#TradingPlatform# · 交易账户：#login# · 账户类型：#accountType# · 交易密码：#Password# · 只读密码：#InvestorPassword# · 服务器名称：#Server# · 基准货币：#AccountCurrency#<br><br>如果您在交易过程中遇到任何不清楚的地方或问题，欢迎随时联系我们的客服团队，我们将竭诚为您服务。邀请您关注CPT Markets官方微信公众号，获取最新的投资策略、全球动态和平台活动信息。<br><br>本邮件为系统自动发送，请勿直接回复。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg2c c2">E3</span><span class="email-full-title">Complete Your Verification</span><span style="font-size:11px;color:var(--text3);">T0+2-4h · CTA: Complete Verification</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s2e3','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s2e3','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s2e3-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Complete your KYC verification — it only takes 2 minutes</div></div>
+      <div class="email-field"><div class="email-field-label">Preheader</div><div class="email-field-val">Unlock deposits, trading and full account access</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>Thank you for registering with CPT. We noticed your identity verification (KYC) is still pending. Completing this quick step unlocks:<br><br>• Account funding (deposits &amp; withdrawals)<br>• Full trading access on your MT4 account<br>• Personal account management tools<br><br>It takes about 2 minutes — simply log in to your Client Portal and follow the guided steps.<br><br>If you have any questions, our support team is here to help.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg2c c2">Complete Verification</span></div>
+    </div>
+    <div class="email-tab-content" id="s2e3-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">完成身份验证（KYC），仅需2分钟</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>感谢您注册CPT账户。我们注意到您的身份验证（KYC）尚未完成。完成验证后，您将可以：<br><br>• 进行账户入金与出金操作<br>• 使用您的MT4账户进行完整交易<br>• 管理个人账户设置<br><br>整个流程仅需约2分钟，登录您的客户门户并按照指引操作即可完成。<br><br>如有任何疑问，欢迎随时联系我们的客服团队。<br><br>本邮件为系统自动发送，请勿直接回复。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg2c c2">E4</span><span class="email-full-title">Your Data Is Safe With CPT</span><span style="font-size:11px;color:var(--text3);">+24h from E3 · CTA: Complete Verification</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s2e4','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s2e4','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s2e4-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Your information is safe with CPT</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>We understand that sharing personal documents can feel like a big step — so we want to reassure you.<br><br>CPT uses bank-grade encryption to protect your data, and your documents are used solely to meet regulatory verification requirements. They are never shared with third parties for marketing purposes.<br><br>Completing KYC is quick, secure, and the only thing standing between you and full account access.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg2c c2">Complete Verification</span></div>
+    </div>
+    <div class="email-tab-content" id="s2e4-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">您的信息安全，我们悉心保护</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>我们理解提交个人证件资料可能会让您有所顾虑，在此我们想向您说明：CPT采用银行级加密技术保护您的信息，您提交的证件仅用于满足监管要求的身份核实，绝不会用于任何市场推广用途或提供给第三方。<br><br>完成KYC验证既快捷又安全，也是您开启完整账户权限前的最后一步。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg2c c2">E5</span><span class="email-full-title">Final Notice — Account Waiting</span><span style="font-size:11px;color:var(--text3);">+48h from E3 · CTA: Complete Verification Now</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s2e5','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s2e5','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s2e5-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Final reminder: your account is waiting to be activated</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>This is a final reminder that your CPT account is still pending identity verification. Until KYC is complete, you won't be able to deposit funds or place trades on your account.<br><br>Don't miss out — complete your verification today to unlock full access.<br><br>If you're experiencing any difficulty, please reach out to our support team and we'll be glad to help.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg2c c2">Complete Verification Now</span></div>
+    </div>
+    <div class="email-tab-content" id="s2e5-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">最后提醒：您的账户尚待激活</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>这是关于完成身份验证（KYC）的最后一次提醒。在完成验证之前，您将无法进行入金或交易操作。<br><br>请勿错过 —— 立即完成验证，开启账户完整权限。<br><br>如在操作过程中遇到任何困难，欢迎随时联系我们的客服团队，我们将竭诚为您提供协助。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg2c c2">E6</span><span class="email-full-title">Verification Pending Review</span><span style="font-size:11px;color:var(--text3);">On KYC submission · CTA: none</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s2e6','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s2e6','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s2e6-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Account Being Verified / Registration Pending Review</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>Thank you for choosing CPT. We've received your application, and our team is currently in the process of verifying your account. Please allow us some time to complete this process — we'll be in touch with you shortly.<br><br>If you have any urgent inquiries, feel free to contact our support team. We appreciate your patience.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+    </div>
+    <div class="email-tab-content" id="s2e6-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">实名认证审核中</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>感谢您选择CPT！您的申请已成功提交，目前正进入审核程序中。我们的团队将尽快完成审核，并于完成后通知您结果。<br><br>如您在过程中有任何疑问，欢迎随时联系我们的客服团队，我们将竭诚为您服务。<br><br>本邮件为系统自动发送，请勿直接回复。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <!-- STAGE 3 FULL CONTENT -->
+  <div style="font-size:14px; font-weight:700; color:var(--d3); margin:2rem 0 0.75rem;">Stage 3 · KYC → FTD</div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg3c c3">E1</span><span class="email-full-title">Fund Your Account & Claim Your 30% Bonus</span><span style="font-size:11px;color:var(--text3);">Immediate on KYC approval · CTA: Fund My Account</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s3e1','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s3e1','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s3e1-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">You're verified! Fund your account and claim your 30% bonus (up to $500)</div></div>
+      <div class="email-field"><div class="email-field-label">Preheader</div><div class="email-field-val">Full account access is unlocked — here's your next step</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>Great news — your identity verification is complete and your CPT account is now fully active. Log in to your Client Portal to manage your account, fund your account, and start trading on MT4.<br><br>As a welcome reward, CPT is offering a <strong>30% deposit bonus on your first deposit, up to $500</strong>.<br><br><strong>How to claim:</strong><br>1. Log in to your Client Portal<br>2. Go to Campaign<br>3. Apply for the Deposit Bonus<br>4. Make your first deposit — your bonus will be credited automatically based on your deposit amount<br><br>Terms and conditions apply. Need help? Our support team is happy to assist.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg3c c3">Fund My Account</span></div>
+    </div>
+    <div class="email-tab-content" id="s3e1-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">认证成功！立即入金并领取30%奖金（最高$500）</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>好消息 —— 您的身份认证已成功通过，CPT账户现已全面激活。您可登录客户门户进行入金、管理账户设置，并在MT4平台开始交易。<br><br>为答谢您的信任，CPT特别为您提供<strong>首次入金30%奖金，最高可达$500</strong>。<br><br><strong>领取方式：</strong><br>1. 登录您的客户门户<br>2. 进入"活动"（Campaign）页面<br>3. 申请入金奖金<br>4. 完成首次入金后，奖金将根据您的入金金额自动发放至账户<br><br>活动详情及条款请以官网公布为准。如需协助，欢迎随时联系我们的客服团队。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg3c c3">E2</span><span class="email-full-title">How to Fund in 3 Steps</span><span style="font-size:11px;color:var(--text3);">+48h · CTA: Fund My Account</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s3e2','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s3e2','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s3e2-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">How to fund your CPT account in 3 easy steps</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>Not sure how to get started? Funding your account is simple:<br><br>1. Log in to your Client Portal<br>2. Select your preferred payment method<br>3. Enter your deposit amount and confirm<br><br>Remember — your 30% deposit bonus (up to $500) is still waiting to be claimed via Campaign in your portal.<br><br>If you need help along the way, our support team is available 24/5.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg3c c3">Fund My Account</span></div>
+    </div>
+    <div class="email-tab-content" id="s3e2-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">三步完成CPT账户入金</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>不确定如何开始？为您的账户入金非常简单：<br><br>1. 登录您的客户门户<br>2. 选择您偏好的支付方式<br>3. 输入入金金额并确认<br><br>别忘了，您的30%入金奖金（最高$500）仍可在客户门户"活动"页面申请领取。<br><br>如在操作过程中需要协助，我们的客服团队每周5天24小时为您服务。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg3c c3">E3</span><span class="email-full-title">Don't Miss Your $500 Bonus</span><span style="font-size:11px;color:var(--text3);">+5 days · CTA: Claim Your Bonus</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s3e3','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s3e3','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s3e3-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Don't miss your $500 welcome bonus</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>Your account has been verified and ready to trade for a few days now — but your welcome bonus is still unclaimed.<br><br>Fund your account today to receive a 30% deposit bonus, up to $500, plus enjoy CPT's tight spreads, reliable execution, and dedicated client support.<br><br>Don't leave your reward on the table.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg3c c3">Claim Your Bonus</span></div>
+    </div>
+    <div class="email-tab-content" id="s3e3-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">别错过您的$500欢迎奖金</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>您的账户已通过认证并可正常交易一段时间了，但您的欢迎奖金尚未领取。<br><br>立即入金即可享受最高$500的30%入金奖金，同时体验CPT具竞争力的点差、稳定的交易执行以及专属客户服务。<br><br>别让您的专属奖励白白错过。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <!-- STAGE 4 FULL CONTENT -->
+  <div style="font-size:14px; font-weight:700; color:var(--d4); margin:2rem 0 0.75rem;">Stage 4 · FTD → Lifecycle</div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg4 c4">E1</span><span class="email-full-title">Deposit Received — Welcome to Trading</span><span style="font-size:11px;color:var(--text3);">Immediate on FTD · CTA: Go to MT4</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s4e1','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s4e1','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s4e1-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Deposit received — you're all set to trade</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>Thank you — we've received your deposit, and your account is now funded. If you applied for the deposit bonus, it will be credited automatically based on your deposit amount.<br><br>You're all set to start trading whenever you're ready. A few tools worth knowing about as you get going:<br><br>• Charting tools for technical analysis<br>• Risk management features like stop-loss and take-profit<br>• Price alerts so you never miss a move<br><br>Need a hand? Our support team is happy to walk you through it.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg4 c4">Go to MT4</span></div>
+    </div>
+    <div class="email-tab-content" id="s4e1-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">入金成功 — 您已可以开始交易</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>感谢您完成入金，您的账户现已成功入金。若您已申请入金奖金，奖金将根据您的入金金额自动发放至账户。<br><br>您现在已可随时开始交易。以下是一些您可能会用到的工具：<br><br>• 图表分析工具，助您进行技术分析<br>• 止损/止盈等风险管理功能<br>• 价格提醒功能，助您把握市场动态<br><br>如需协助，我们的客服团队随时为您提供指导。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <div class="email-full-card">
+    <div class="email-full-header"><span class="email-full-num bg4 c4">E2</span><span class="email-full-title">Welcome to CPT — What's Next</span><span style="font-size:11px;color:var(--text3);">Day 14 (fixed) · CTA: Explore the App</span></div>
+    <div class="email-tabs">
+      <div class="email-tab active" onclick="switchTab(this,'s4e5','eng')">ENG</div>
+      <div class="email-tab" onclick="switchTab(this,'s4e5','cn')">简体</div>
+    </div>
+    <div class="email-tab-content active" id="s4e5-eng">
+      <div class="email-field"><div class="email-field-label">Subject</div><div class="email-field-val">Welcome to CPT — here's what's next</div></div>
+      <div class="email-field"><div class="email-field-label">Body</div><div class="email-field-body">Dear #name#,<br><br>You've now been with CPT for two weeks — thank you for choosing us as your trading partner.<br><br>From here, we'll keep you updated with market insights, platform tips, and exclusive client programs — including our Refer-a-Friend rewards and mobile app.<br><br>Thank you for choosing CPT. We're glad to have you with us and look forward to supporting your trading going forward.<br><br>Sincerely,<br>CPT Client Experience Team</div></div>
+      <div class="email-cta-line"><span class="email-cta-btn bg4 c4">Explore the App</span></div>
+    </div>
+    <div class="email-tab-content" id="s4e5-cn">
+      <div class="email-field"><div class="email-field-label">主题</div><div class="email-field-val">欢迎加入CPT — 精彩内容持续更新</div></div>
+      <div class="email-field"><div class="email-field-label">正文</div><div class="email-field-body">尊敬的客户 #name#，您好！<br><br>您加入CPT已满两周，感谢您选择我们作为您的交易伙伴。<br><br>接下来，我们将持续为您带来市场资讯、平台使用技巧以及专属客户活动，包括推荐好友奖励计划及CPT手机应用。<br><br>感谢您选择CPT，期待持续陪伴您的交易旅程。<br><br>此致<br>CPT Markets 团队</div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="border-top: 1px solid var(--border); margin-top: 2rem; padding-top: 1.5rem; text-align: center; font-size: 12px; color: var(--text3); padding-bottom: 2rem;">
+    <div style="margin-bottom: 6px;"><strong style="color: var(--text);">CPT Markets Retail EDM Onboarding Journey — Full Overview</strong></div>
+    <div>CPT Markets Marketing · 3 Stages · 11 Emails · EN/CN bilingual · Stage 2 = production copy, Stage 3–4 = draft for review</div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+function toggleAccordion(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.accordion-arrow');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+function switchTab(tabEl, prefix, lang) {
+  const tabs = tabEl.parentElement.querySelectorAll('.email-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  tabEl.classList.add('active');
+  const card = tabEl.closest('.email-full-card');
+  card.querySelectorAll('.email-tab-content').forEach(c => c.classList.remove('active'));
+  const target = card.querySelector('#' + prefix + '-' + lang);
+  if (target) target.classList.add('active');
+}
+</script>
+</body>
+</html>
